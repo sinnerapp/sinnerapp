@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  @media screen and (prefers-color-scheme: dark) {
+    body {
+      @apply bg-white dark:bg-gray-800;
+    }
+
+    #zImage {
+      @apply fixed top-0 bottom-0 left-0 right-0 -z-10;
+    }
+    #zImage2 {
+      @apply fixed top-0 bottom-0 left-0 right-0 -z-10;
+    }
+  }
+}
