@@ -18,7 +18,7 @@
         <img
           alt="Cover Image"
           referrerpolicy="no-referrer"
-          src="`${
+          :src="`${
             contents.provider == 'hentai2read'
               ? content.cover.replace(
                   'https://hentai2read.com/cdn-cgi/image/format=auto/',
