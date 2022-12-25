@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import Contents from "@/components/Contents.vue";
+import Contents from "./../components/Contents.vue";
 export default {
   components: {
     Contents,

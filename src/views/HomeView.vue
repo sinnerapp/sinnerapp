@@ -26,7 +26,7 @@
 <script>
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import Contents from "@/components/Contents.vue";
+import Contents from "./../components/Contents.vue";
 
 dayjs.extend(relativeTime);
 

@@ -177,8 +177,8 @@
 <script>
 // @ts-nocheck
 
-import Modal from "@/components/Modal.vue";
-import Contents from "@/components/Contents.vue";
+import Modal from "./../components/Modal.vue";
+import Contents from "./../components/Contents.vue";
 import { v4 as uuidv4 } from "uuid";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
