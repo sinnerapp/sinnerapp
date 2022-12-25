@@ -16,19 +16,19 @@
         v-for="(content, i) in contents.data"
         :key="i"
       >
-        <!-- :src="`${
+        <img
+          alt="Cover Image"
+          :src="`${
             contents.provider == 'hentai2read'
               ? content.cover.replace(
                   'https://hentai2read.com/cdn-cgi/image/format=auto/',
                   ''
                 )
               : content.cover
-          }`" -->
-        <img
-          alt="Cover Image"
+          }`"
           referrerpolicy="no-referrer"
           loading="lazy"
-          class="absolute inset-0 object-cover w-full h-full transition-opacity opacity-75  group-hover:opacity-50 rounded-xl"
+          class="absolute inset-0 object-cover w-full h-full transition-opacity opacity-50  md:opacity-75 group-hover:opacity-50 rounded-xl"
         />
 
         <div class="relative max-w-xs p-8 md:max-w-none">

@@ -20,7 +20,7 @@
         </li>
         <li>
           <a
-            href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"
+            href="https://tailwindcss.com/"
             target="_blank"
             class="text-blue-500 hover:text-blue-600"
           >
@@ -35,7 +35,7 @@
         </li>
         <li>
           <a
-            href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"
+            href="https://vuejs.org/"
             target="_blank"
             class="text-blue-500 hover:text-blue-600"
           >
@@ -55,6 +55,17 @@
       <p class="font-mono">App Version: <span id="app-version">V1.0.0</span></p>
     </div>
 
+    <div id="developer-note">
+      <pre class="font-mono text-sm dark:text-gray-400">
+Bebas pergunakan aplikasi ini untuk keperluan apapun 😏.
+
+Kalo mau komplain, silahkan komplen ke diri sendiri karena make aplikasi ini.
+
+Kalo gambarnya ga ngeload salahin provider internet lu, 
+Siapa suruh blokir blokir hehe.
+          -K, developer out-
+      </pre>
+    </div>
     <div id="copyright">
       <p>&copy; Copyright 2022 403app</p>
       <br />

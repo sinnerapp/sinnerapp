@@ -99,7 +99,7 @@ export default {
       };
     },
   },
-  created() {
+  mounted() {
     if (this.hideOnScroll) {
       this.hideBottomNavOnScroll();
     }

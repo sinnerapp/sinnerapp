@@ -348,17 +348,10 @@ export default {
                 })
                 .then((result) => {
                   result.created_at = new Date();
-                  // set how long data will be cached
+                  // set how much data will be cached
                   result.expired_at = dayjs().add(45, "minute");
-                  result.provider = this.provider;
-                  result.uKey = uuidv4();
-                  this.contents = result;
-                  this.sortBy = result.sort;
-                  this.currentPage = result.page;
-                  localStorage.setItem(
-                    "cached_data_epxlore_page",
-                    JSON.stringify(result)
-                  );
+                  result.provider = this.defaultProvider;
+                  localStorage.setItem("cached_data", JSON.stringify(result));
                   this.contents = result;
                   console.log("Request Success!");
                 });
@@ -368,17 +361,10 @@ export default {
           })
           .then((result) => {
             result.created_at = new Date();
-            // set how long data will be cached
+            // set how much data will be cached
             result.expired_at = dayjs().add(45, "minute");
-            result.provider = this.provider;
-            result.uKey = uuidv4();
-            this.contents = result;
-            this.sortBy = result.sort;
-            this.currentPage = result.page;
-            localStorage.setItem(
-              "cached_data_epxlore_page",
-              JSON.stringify(result)
-            );
+            result.provider = this.defaultProvider;
+            localStorage.setItem("cached_data", JSON.stringify(result));
             this.contents = result;
             console.log("Request Success!");
           })

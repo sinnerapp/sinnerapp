@@ -4,7 +4,8 @@ import App from "./App.vue";
 import "./registerServiceWorker";
 import router from "./router";
 import Notifications from "@kyvg/vue3-notification";
-import { get, set } from "idb-keyval";
+import velocity from "velocity-animate";
+import { clear, get, set } from "idb-keyval";
 
 get("history_list").then((value) => {
   if (!value) {
@@ -19,4 +20,4 @@ get("fav_list").then((value) => {
   } else console.log("favorite list is already created ");
 });
 
-createApp(App).use(router).use(Notifications).mount("#app");
+createApp(App).use(router).use(Notifications, { velocity }).mount("#app");

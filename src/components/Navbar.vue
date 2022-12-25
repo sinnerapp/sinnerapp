@@ -96,7 +96,7 @@
           >
         </div>
 
-        <div class="flex justify-center md:block">
+        <div class="flex flex-row justify-center gap-4">
           <router-link
             class="relative text-gray-700 transition-colors duration-300 transform  dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-300"
             to="/settings"
@@ -119,6 +119,25 @@
                 stroke-linejoin="round"
                 stroke-width="2"
                 d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+              ></path>
+            </svg>
+          </router-link>
+          <router-link
+            class="relative text-gray-700 transition-colors duration-300 transform  dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-300"
+            to="/about"
+          >
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
               ></path>
             </svg>
           </router-link>

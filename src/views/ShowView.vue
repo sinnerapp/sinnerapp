@@ -21,13 +21,18 @@
       <img :src="img" alt="Image" class="w-full" loading="lazy" />
     </div>
   </div>
+  <AddFavButtonVue :content="content" :favorited="favorited" />
 </template>
 
 <script>
 import { get, set, update } from "idb-keyval";
+import AddFavButtonVue from "./../components/AddFavButton.vue";
 
 export default {
   props: ["allowHistory"],
+  components: {
+    AddFavButtonVue,
+  },
   data() {
     return {
       apiEndpoints: [
@@ -35,6 +40,7 @@ export default {
         "https://wandering-flip-flops-ant.cyclic.app",
       ],
       content: {},
+      favorited: false,
     };
   },
   methods: {
@@ -51,6 +57,10 @@ export default {
             result.data.provider = this.$route.params.provider;
             if (this.allowHistory) {
               result.data.created_at = new Date();
+              result.data.cover =
+                result.data.image[
+                  Math.floor(Math.random() * result.data.image.length)
+                ];
               update("history_list", (oldValue) => {
                 const existingIndex = oldValue.findIndex(
                   (el) => el.id === result.data.id
@@ -77,14 +87,18 @@ export default {
             result.data.provider = this.$route.params.provider;
             if (this.allowHistory) {
               result.data.created_at = new Date();
+              result.data.cover =
+                result.data.image[
+                  Math.floor(Math.random() * result.data.image.length)
+                ];
               update("history_list", (oldValue) => {
                 const existingIndex = oldValue.findIndex(
                   (el) => el.id === result.data.id
                 );
-                if (existingIndex >= 0) {
-                  console.log("already in list");
-                  return oldValue;
-                }
+                // if (existingIndex >= 0) {
+                //   console.log("already in list");
+                //   return oldValue;
+                // }
                 console.log("success added to list");
                 return [...oldValue, result.data];
               });
@@ -95,6 +109,11 @@ export default {
   },
   mounted() {
     this.fetchOne();
+    get("fav_list").then((value) => {
+      if (value.findIndex((el) => el.id === this.content.id) >= 0) {
+        this.favorited = true;
+      } else this.favorited = false;
+    });
   },
 };
 </script>

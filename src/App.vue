@@ -1,5 +1,71 @@
 <template>
-  <notifications position="bottom right" width="300" :ignoreDuplicates="true" />
+  <div
+    class="fixed z-50 p-8 mx-4 bg-white border border-indigo-100 shadow-lg  bottom-10 md:mx-24 rounded-2xl"
+    role="alert"
+    v-show="false"
+  >
+    <div class="items-center sm:flex">
+      <span
+        class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-white bg-indigo-400 rounded-full "
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-6 h-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z"
+          />
+        </svg>
+      </span>
+
+      <p class="mt-3 text-lg font-medium sm:mt-0 sm:ml-3">
+        Hello, Our Welcomed User!
+      </p>
+    </div>
+
+    <p class="mt-4 text-gray-500">
+      This application is available to use "offline"! All you had to do is click
+      "Install" button down below and it will
+      <a class="text-indigo-500" href="https://web.dev/progressive-web-apps/"
+        >install the website as an app</a
+      >. *This message will be only shown once.
+
+      <br /><br />
+      Halo, pengunjung yang soleh & soleha 😏. Klik tombol "install" dibawah
+      untuk install website ini sebagai aplikasi biar bisa dipake "offline".
+      *Pesan ini hanya akan ditampilkan sekali.
+    </p>
+
+    <div class="mt-6 sm:flex">
+      <button
+        class="inline-block w-full px-5 py-3 text-sm font-semibold text-center text-white bg-indigo-500 rounded-lg  sm:w-auto"
+        href=""
+      >
+        Install
+      </button>
+
+      <button
+        class="inline-block w-full px-5 py-3 mt-3 text-sm font-semibold text-center text-gray-500 rounded-lg  bg-gray-50 sm:mt-0 sm:ml-3 sm:w-auto"
+        href=""
+      >
+        Dismiss
+      </button>
+    </div>
+  </div>
+
+  <notifications
+    position="top right"
+    width="300"
+    animation-type="velocity"
+    :reverse="true"
+    :max="5"
+  />
   <div
     id="zImage"
     v-if="settings.allowBgPicture"
@@ -17,20 +83,20 @@
     class="w-full mx-auto mt-20 mb-24 lg:px-0"
     :class="$route.name == '404' ? '' : 'max-w-5xl'"
   >
-    <router-view
+    <RouterView
       v-slot="{ Component }"
       :defaultProvider="settings.defaultProvider"
       :animatePage="settings.animatePage"
       :greets="settings.greets"
       :allowHistory="settings.allowHistory"
     >
-      <transition name="slide-fade" v-if="settings.animatePage">
+      <Transition name="slide-fade" v-if="settings.animatePage">
         <component :is="Component" />
-      </transition>
+      </Transition>
       <div v-else>
         <component :is="Component" />
       </div>
-    </router-view>
+    </RouterView>
   </div>
 
   <Footer class="bg-indigo-500 border-t" v-if="settings.showFooter" />
@@ -38,12 +104,14 @@
     v-if="settings.showBottomNav"
     :hideOnScroll="settings.hideBottomNavOnScroll"
   />
+  <BackToTopButton />
 </template>
 
 <script>
 import Footer from "./components/Footer.vue";
 import Navbar from "./components/Navbar.vue";
 import BottomNav from "./components/BottomNav.vue";
+import BackToTopButton from "./components/BackToTopButton.vue";
 import { defaultSettings } from "./service/default-settings";
 import { get } from "idb-keyval";
 import AOS from "aos";
@@ -54,12 +122,14 @@ export default {
     return {
       settings:
         JSON.parse(localStorage.getItem("403app_settings")) || defaultSettings,
+      hideBanner: false,
     };
   },
   components: {
     Footer,
     Navbar,
     BottomNav,
+    BackToTopButton,
   },
   methods: {
     async getBg() {

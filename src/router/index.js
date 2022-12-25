@@ -48,16 +48,17 @@ const routes = [
   },
   {
     path: "/:provider/:id",
+    alias: "/:provider/:id/:catchAll(.*)",
     name: "showViaId",
     component: () => {
       return import("../views/ShowView.vue");
     },
   },
   {
-    path: "/:provider/:id/:shit",
-    name: "showViaId",
+    path: "/favorite",
+    name: "favorite",
     component: () => {
-      return import("../views/ShowView.vue");
+      return import("../views/FavoriteView.vue");
     },
   },
   {
