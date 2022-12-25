@@ -15,6 +15,7 @@
     "axios": "^1.2.1",
     "daisyui": "^2.46.0",
     "dayjs": "^1.11.7",
+    "idb-keyval": "^6.2.0",
     "register-service-worker": "^1.7.2",
     "uuid": "^9.0.0",
     "vue": "^3.2.13",

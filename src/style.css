@@ -14,5 +14,16 @@
     #zImage2 {
       @apply fixed top-0 bottom-0 left-0 right-0 -z-10;
     }
+
+    #navbar-menu {
+      z-index: 999999999999999;
+    }
+  }
+
+  .nav-route-link {
+    @apply my-2 font-semibold text-gray-700 transition-colors duration-300 transform dark:text-gray-200 hover:text-indigo-500 dark:hover:text-indigo-400 md:mx-4 md:my-0;
+  }
+  .nav-route-link.active {
+    @apply text-indigo-400 scale-105;
   }
 }

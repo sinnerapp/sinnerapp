@@ -24,7 +24,10 @@
 </template>
 
 <script>
+import { get, set, update } from "idb-keyval";
+
 export default {
+  props: ["allowHistory"],
   data() {
     return {
       apiEndpoints: [
@@ -45,6 +48,21 @@ export default {
           .then((response) => response.json())
           .then((result) => {
             this.content = result.data;
+            result.data.provider = this.$route.params.provider;
+            if (this.allowHistory) {
+              result.data.created_at = new Date();
+              update("history_list", (oldValue) => {
+                const existingIndex = oldValue.findIndex(
+                  (el) => el.id === result.data.id
+                );
+                if (existingIndex >= 0) {
+                  console.log("already in list");
+                  return oldValue;
+                }
+                console.log("success added to list");
+                return [...oldValue, result.data];
+              });
+            }
           });
       } catch (error) {
         console.log(error);
@@ -55,7 +73,22 @@ export default {
         )
           .then((response) => response.json())
           .then((result) => {
-            this.content = result.data.image;
+            this.content = result.data;
+            result.data.provider = this.$route.params.provider;
+            if (this.allowHistory) {
+              result.data.created_at = new Date();
+              update("history_list", (oldValue) => {
+                const existingIndex = oldValue.findIndex(
+                  (el) => el.id === result.data.id
+                );
+                if (existingIndex >= 0) {
+                  console.log("already in list");
+                  return oldValue;
+                }
+                console.log("success added to list");
+                return [...oldValue, result.data];
+              });
+            }
           });
       }
     },

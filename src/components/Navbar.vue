@@ -1,48 +1,129 @@
 <template>
   <nav
-    class="flex px-4 py-4 text-white bg-indigo-500 bg-opacity-50 shadow-md  dark:bg-indigo-600 backdrop-blur-sm"
-    :class="!greets ? 'justify-center' : 'justify-between'"
+    class="fixed top-0 z-50 w-full  bg-gray-50 dark:bg-gray-800 bg-opacity-80 dark:bg-opacity-80 backdrop-blur-sm"
   >
-    <span class="float-left font-semibold" v-if="greets">403App ( ͡° ͜ʖ ͡°)</span>
-    <div class="flex items-center gap-3">
-      <router-link to="/" :class="$route.name == 'home' ? 'font-semibold' : ''"
-        >Home</router-link
+    <div
+      class="container relative px-6 py-4 mx-auto  md:flex md:justify-between md:items-center"
+    >
+      <div class="flex items-center justify-between">
+        <div>
+          <router-link
+            class="text-base font-bold text-gray-800 transition-colors duration-300 transform  md:text-2xl dark:text-white lg:text-3xl hover:text-gray-700 dark:hover:text-gray-300"
+            to="/"
+            >403App 💦</router-link
+          >
+        </div>
+
+        <!-- Mobile menu button -->
+        <div class="flex lg:hidden">
+          <button
+            x-cloak
+            @click="isNavbarOpen = !isNavbarOpen"
+            type="button"
+            class="text-gray-500  dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400 focus:outline-none focus:text-gray-600 dark:focus:text-gray-400"
+            aria-label="toggle menu"
+          >
+            <svg
+              v-show="!isNavbarOpen"
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-6 h-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M4 8h16M4 16h16"
+              />
+            </svg>
+
+            <svg
+              v-show="isNavbarOpen"
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-6 h-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
+      <div
+        id="navbar-menu"
+        v-cloak
+        :class="[
+          isNavbarOpen
+            ? 'translate-x-0 opacity-100 '
+            : 'opacity-0 -translate-x-full',
+        ]"
+        class="absolute inset-x-0 w-full px-6 py-4 transition-all duration-300 ease-in-out border-b border-black border-opacity-50  dark:shadow-white/10 dark:border-white md:mt-0 md:p-0 md:top-0 md:relative md:bg-transparent md:w-auto md:opacity-100 md:translate-x-0 md:flex md:items-center dark:border-opacity-50 backdrop-blur-sm md:border-none"
       >
-      <router-link
-        to="/explore"
-        :class="$route.name == 'explore' ? 'font-semibold' : ''"
-        >Explore</router-link
-      >
-      <router-link
-        to="/about"
-        :class="$route.name == 'about' ? 'font-semibold' : ''"
-        >About</router-link
-      >
-      <router-link
-        to="/settings"
-        :class="$route.name == 'settings' ? 'font-semibold' : ''"
-        class="flex"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="w-6 h-6"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z"
-          />
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-          />
-        </svg>
-      </router-link>
+        <div class="flex flex-col md:flex-row md:mx-6">
+          <router-link
+            class="nav-route-link"
+            :class="$route.name == 'home' ? 'active' : ''"
+            to="/"
+            >Home</router-link
+          >
+          <router-link
+            class="nav-route-link"
+            :class="$route.name == 'explore' ? 'active' : ''"
+            to="/explore"
+            >Explore</router-link
+          >
+          <router-link
+            class="nav-route-link"
+            :class="$route.name == 'favorite' ? 'active' : ''"
+            to="/favorite"
+            >Favorite</router-link
+          >
+          <router-link
+            class="nav-route-link"
+            :class="$route.name == 'history' ? 'active' : ''"
+            to="/history"
+            >History</router-link
+          >
+        </div>
+
+        <div class="flex justify-center md:block">
+          <router-link
+            class="relative text-gray-700 transition-colors duration-300 transform  dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-300"
+            to="/settings"
+          >
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+              ></path>
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+              ></path>
+            </svg>
+          </router-link>
+        </div>
+      </div>
     </div>
   </nav>
 </template>
@@ -51,8 +132,12 @@
 export default {
   props: ["greets"],
   name: "Navbar",
+  data() {
+    return {
+      isNavbarOpen: false,
+    };
+  },
 };
 </script>
 
-<style>
-</style>
+<style></style>

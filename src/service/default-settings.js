@@ -1,8 +1,8 @@
 export const defaultSettings = {
   defaultProvider: "pururin",
-  darkMode: false,
+  darkMode: true,
   showFooter: true,
-  showBottomNav: true,
+  showBottomNav: false,
   animateOnScroll: false,
   animatePage: true,
   cacheContents: true,
@@ -11,9 +11,10 @@ export const defaultSettings = {
   bgImage: "",
   bgBlur: 10,
   bgRepeat: true,
-  allowBgPicture: true,
+  allowBgPicture: false,
   hideBottomNavOnScroll: true,
-  cacheHistory: true,
+  cacheHistory: false,
   bgOpacity: 10,
+  allowHistory: true,
   greets: true,
 };

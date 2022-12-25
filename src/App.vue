@@ -14,7 +14,7 @@
   ></div>
   <Navbar :greets="settings.greets" />
   <div
-    class="w-full mx-auto mt-12 mb-24 lg:px-0"
+    class="w-full mx-auto mt-20 mb-24 lg:px-0"
     :class="$route.name == '404' ? '' : 'max-w-5xl'"
   >
     <router-view
@@ -22,6 +22,7 @@
       :defaultProvider="settings.defaultProvider"
       :animatePage="settings.animatePage"
       :greets="settings.greets"
+      :allowHistory="settings.allowHistory"
     >
       <transition name="slide-fade" v-if="settings.animatePage">
         <component :is="Component" />
@@ -44,6 +45,7 @@ import Footer from "./components/Footer.vue";
 import Navbar from "./components/Navbar.vue";
 import BottomNav from "./components/BottomNav.vue";
 import { defaultSettings } from "./service/default-settings";
+import { get } from "idb-keyval";
 import AOS from "aos";
 import "aos/dist/aos.css";
 

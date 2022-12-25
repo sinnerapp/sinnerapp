@@ -54,6 +54,13 @@ const routes = [
     },
   },
   {
+    path: "/:provider/:id/:shit",
+    name: "showViaId",
+    component: () => {
+      return import("../views/ShowView.vue");
+    },
+  },
+  {
     path: "/settings",
     name: "settings",
     component: () => {

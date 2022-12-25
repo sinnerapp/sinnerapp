@@ -1,4 +1,5 @@
 <template>
+  <!-- <pre class="text-white">{{ contents }}</pre> -->
   <div class="grid gap-8 sm:grid-cols-2 xl:grid-cols-3">
     <transition-group :name="animatePage ? 'slide-fade' : ''">
       <router-link
@@ -6,7 +7,7 @@
         data-aos-offset="0"
         :data-aos-delay="i * 20"
         data-aos-once="true"
-        :to="`/${contents.provider}/${
+        :to="`/${contents.provider || content.provider}/${
           typeof content.id == 'string'
             ? content.id.replace('/', '')
             : content.id
@@ -15,22 +16,28 @@
         v-for="(content, i) in contents.data"
         :key="i"
       >
-        <img
-          alt="Cover Image"
-          referrerpolicy="no-referrer"
-          :src="`${
+        <!-- :src="`${
             contents.provider == 'hentai2read'
               ? content.cover.replace(
                   'https://hentai2read.com/cdn-cgi/image/format=auto/',
                   ''
                 )
               : content.cover
-          }`"
+          }`" -->
+        <img
+          alt="Cover Image"
+          referrerpolicy="no-referrer"
           loading="lazy"
           class="absolute inset-0 object-cover w-full h-full transition-opacity opacity-75  group-hover:opacity-50 rounded-xl"
         />
 
         <div class="relative max-w-xs p-8 md:max-w-none">
+          <p
+            v-if="content.created_at"
+            class="text-sm tracking-widest text-indigo-500 uppercase  font-mediu m line-clamp-1"
+          >
+            {{ formatDate(content.created_at) }}
+          </p>
           <p
             class="text-sm font-medium tracking-widest text-pink-500 uppercase  line-clamp-1"
           >
@@ -74,9 +81,16 @@
 </template>
 
 <script>
+import dayjs from "dayjs";
+
 export default {
   name: "Contents",
-  props: ["contents", "provider", "animatePage"],
+  props: ["contents", "provider", "animatePage", "reverse"],
+  methods: {
+    formatDate(date) {
+      return dayjs(date).fromNow();
+    },
+  },
 };
 </script>
 
