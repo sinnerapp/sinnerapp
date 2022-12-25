@@ -43,29 +43,15 @@
 import Footer from "./components/Footer.vue";
 import Navbar from "./components/Navbar.vue";
 import BottomNav from "./components/BottomNav.vue";
+import { defaultSettings } from "./service/default-settings";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
 export default {
   data() {
     return {
-      settings: JSON.parse(localStorage.getItem("403app_settings")) || {
-        defaultProvider: "pururin",
-        darkMode: false,
-        showFooter: true,
-        showBottomNav: true,
-        animateOnScroll: false,
-        animatePage: true,
-        cacheContents: true,
-        bgImage: "",
-        bgBlur: 10,
-        bgOpacity: 3,
-        bgRepeat: true,
-        cacheHistory: true,
-        hideBottomNavOnScroll: true,
-        allowBgPicture: true,
-        greets: true,
-      },
+      settings:
+        JSON.parse(localStorage.getItem("403app_settings")) || defaultSettings,
     };
   },
   components: {

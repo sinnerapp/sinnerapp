@@ -326,7 +326,7 @@
           <button
             @click="resetSettings"
             type="button"
-            class="px-4 text-base text-center text-white transition duration-200 ease-in bg-red-600 rounded-lg shadow-md  font-se mibold hover:bg-red-700 focus:ring-red-500 focus:ring-offset-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2"
+            class="px-4 text-base text-center text-white transition duration-200 ease-in bg-red-600 rounded-lg shadow-md font-se mibold hover:bg-red-700 focus:ring-red-500 focus:ring-offset-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2"
           >
             Reset
           </button>
@@ -341,7 +341,7 @@
           <button
             v-on:click="updateSettings"
             type="button"
-            class="px-4 py-2 text-base font-semibold text-center text-white transition duration-200 ease-in bg-indigo-600 rounded-lg shadow-md  hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2"
+            class="px-4 py-2 text-base font-semibold text-center text-white transition duration-200 ease-in bg-indigo-600 rounded-lg shadow-md hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2"
           >
             Save
           </button>
@@ -353,6 +353,8 @@
 
 <script>
 // @ts-nocheck
+import { defaultSettings } from './../service/default-settings'
+
 export default {
   data() {
     return {
@@ -364,50 +366,14 @@ export default {
         "hentai2read",
         "3hentai",
       ],
-      settings: {
-        defaultProvider: "pururin",
-        darkMode: false,
-        showFooter: true,
-        showBottomNav: true,
-        animateOnScroll: false,
-        animatePage: true,
-        cacheContents: true,
-        showNotification: true,
-        imageOnly: false,
-        bgImage: "",
-        bgBlur: 10,
-        bgRepeat: true,
-        allowBgPicture: true,
-        hideBottomNavOnScroll: true,
-        cacheHistory: true,
-        bgOpacity: 10,
-        greets: true,
-      },
+      settings: defaultSettings,
     };
   },
   methods: {
     resetSettings() {
       localStorage.setItem(
         "403app_settings",
-        JSON.stringify({
-          defaultProvider: "pururin",
-          darkMode: false,
-          showFooter: true,
-          showBottomNav: true,
-          animateOnScroll: false,
-          animatePage: true,
-          cacheContents: true,
-          showNotification: true,
-          imageOnly: false,
-          bgImage: "",
-          bgBlur: 10,
-          hideBottomNavOnScroll: true,
-          allowBgPicture: true,
-          cacheHistory: true,
-          bgOpacity: 3,
-          bgRepeat: true,
-          greets: true,
-        })
+        JSON.stringify(defaultSettings)
       );
       //   console.log(localStorage.getItem("403app_settings"));
       this.$notify({
