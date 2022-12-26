@@ -2,7 +2,7 @@
   <div
     class="fixed z-50 p-8 mx-4 bg-white border border-indigo-100 shadow-lg  bottom-10 md:mx-24 rounded-2xl"
     role="alert"
-    v-if="deferredPrompt"
+    v-if="deferredPrompt && showBanner"
   >
     <div class="items-center sm:flex">
       <span
@@ -122,6 +122,7 @@ export default {
       settings:
         JSON.parse(localStorage.getItem("403app_settings")) || defaultSettings,
       deferredPrompt: null,
+      showBanner: true,
     };
   },
   components: {
@@ -138,12 +139,16 @@ export default {
     },
     async dismiss() {
       this.deferredPrompt = null;
+      localStorage.setItem("showBanner", "false");
+      this.showBanner = false;
     },
     async install() {
       this.deferredPrompt.prompt();
     },
   },
   mounted() {
+    if (localStorage.getItem("showBanner")) this.showBanner = false;
+
     AOS.init({
       disable: !this.settings.animateOnScroll,
     });
