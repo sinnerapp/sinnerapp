@@ -50,12 +50,7 @@
               Cache history when offline
             </p>
           </div>
-          <input
-            type="checkbox"
-            class="toggle toggle-primary"
-            v-model="settings.cacheHistory"
-            v-on:change="updateSettings"
-          />
+          <input type="checkbox" class="toggle toggle-primary" disabled />
         </div>
         <div class="my-12 divider">
           <p class="text-sm capitalize dark:text-white md:text-lg">
@@ -326,7 +321,7 @@
           <button
             @click="resetSettings"
             type="button"
-            class="px-4 text-base text-center text-white transition duration-200 ease-in bg-red-600 rounded-lg shadow-md font-se mibold hover:bg-red-700 focus:ring-red-500 focus:ring-offset-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2"
+            class="px-4 text-base text-center text-white transition duration-200 ease-in bg-red-600 rounded-lg shadow-md  font-se mibold hover:bg-red-700 focus:ring-red-500 focus:ring-offset-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2"
           >
             Reset
           </button>
@@ -341,7 +336,7 @@
           <button
             v-on:click="updateSettings"
             type="button"
-            class="px-4 py-2 text-base font-semibold text-center text-white transition duration-200 ease-in bg-indigo-600 rounded-lg shadow-md hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2"
+            class="px-4 py-2 text-base font-semibold text-center text-white transition duration-200 ease-in bg-indigo-600 rounded-lg shadow-md  hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2"
           >
             Save
           </button>
@@ -353,7 +348,7 @@
 
 <script>
 // @ts-nocheck
-import { defaultSettings } from './../service/default-settings'
+import { defaultSettings } from "./../service/default-settings";
 
 export default {
   data() {
@@ -371,10 +366,7 @@ export default {
   },
   methods: {
     resetSettings() {
-      localStorage.setItem(
-        "403app_settings",
-        JSON.stringify(defaultSettings)
-      );
+      localStorage.setItem("403app_settings", JSON.stringify(defaultSettings));
       //   console.log(localStorage.getItem("403app_settings"));
       this.$notify({
         text: "Settings Reset! New settings will take an effect on next reload",

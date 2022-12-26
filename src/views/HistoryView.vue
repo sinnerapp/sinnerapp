@@ -9,7 +9,13 @@
       </div>
 
       <template v-if="!error">
-        <Contents :contents="history" :key="this.history.key" :reverse="true" />
+        <Contents
+          :contents="history"
+          :key="this.history.key"
+          :reverse="true"
+          :cantPaginate="true"
+          :showMoreInfo="true"
+        />
       </template>
       <template v-else>
         <h2 class="text-lg font-semibold text-center dark:text-gray-400">

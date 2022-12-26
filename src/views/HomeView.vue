@@ -10,7 +10,7 @@
         </h4>
         <router-link
           to="/explore"
-          class="text-gray-500 transition duration-300  focus:text-primary hover:text-primary focus:scale-105"
+          class="text-gray-500 transition duration-300 focus:text-primary hover:text-primary focus:scale-105"
           >View More...</router-link
         >
       </div>
@@ -19,6 +19,7 @@
       :contents="contents"
       :provider="defaultProvider"
       :animatePage="animatePage"
+      :reverse="true"
     />
   </section>
 </template>
@@ -96,7 +97,10 @@ export default {
   mounted() {
     // this.fetchAPI();
     const existingData = localStorage.getItem("cached_data");
-    if (!existingData) this.fetchAPI();
+    if (!existingData) {
+      this.fetchAPI();
+      return false;
+    }
     if (JSON.parse(existingData).provider !== this.defaultProvider)
       this.fetchAPI();
     if (this.dataIsExpired(JSON.parse(existingData).expired_at))

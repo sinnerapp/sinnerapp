@@ -12,7 +12,9 @@
         <Contents
           :contents="favorite"
           :key="this.favorite.key"
+          :cantPaginate="true"
           :reverse="true"
+          :showMoreInfo="true"
         />
       </template>
       <template v-else>

@@ -18,6 +18,7 @@
         d="M5 11l7-7 7 7M5 19l7-7 7 7"
       ></path>
     </svg>
+    <span class="sr-only">Back To Top</span>
   </button>
 </template>
 
@@ -31,7 +32,7 @@ export default {
       let prevScrollpos = window.pageYOffset;
       window.onscroll = () => {
         let currentScrollpos = window.pageYOffset;
-        if (prevScrollpos > currentScrollpos) {
+        if (prevScrollpos < currentScrollpos) {
           this.hide = false;
         } else {
           this.hide = true;

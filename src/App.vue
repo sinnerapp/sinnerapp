@@ -2,7 +2,7 @@
   <div
     class="fixed z-50 p-8 mx-4 bg-white border border-indigo-100 shadow-lg  bottom-10 md:mx-24 rounded-2xl"
     role="alert"
-    v-show="false"
+    v-if="deferredPrompt"
   >
     <div class="items-center sm:flex">
       <span
@@ -30,20 +30,18 @@
     </div>
 
     <p class="mt-4 text-gray-500">
-      This application is available to use "offline"! All you had to do is click
+      This application is available as a Web App! All you had to do is click
       "Install" button down below and it will
       <a class="text-indigo-500" href="https://web.dev/progressive-web-apps/"
         >install the website as an app</a
-      >. *This message will be only shown once.
-
-      <br /><br />
+      >. <br /><br />
       Halo, pengunjung yang soleh & soleha 😏. Klik tombol "install" dibawah
-      untuk install website ini sebagai aplikasi biar bisa dipake "offline".
-      *Pesan ini hanya akan ditampilkan sekali.
+      untuk install website ini sebagai aplikasi.
     </p>
 
     <div class="mt-6 sm:flex">
       <button
+        @click="install"
         class="inline-block w-full px-5 py-3 text-sm font-semibold text-center text-white bg-indigo-500 rounded-lg  sm:w-auto"
         href=""
       >
@@ -51,6 +49,7 @@
       </button>
 
       <button
+        @click="dismiss"
         class="inline-block w-full px-5 py-3 mt-3 text-sm font-semibold text-center text-gray-500 rounded-lg  bg-gray-50 sm:mt-0 sm:ml-3 sm:w-auto"
         href=""
       >
@@ -122,7 +121,7 @@ export default {
     return {
       settings:
         JSON.parse(localStorage.getItem("403app_settings")) || defaultSettings,
-      hideBanner: false,
+      deferredPrompt: null,
     };
   },
   components: {
@@ -136,6 +135,12 @@ export default {
       const res = await fetch("https://api.waifu.pics/nsfw/waifu");
       const data = res.json();
       return data;
+    },
+    async dismiss() {
+      this.deferredPrompt = null;
+    },
+    async install() {
+      this.deferredPrompt.prompt();
     },
   },
   mounted() {
@@ -158,6 +163,16 @@ export default {
         this.settings.bgImage = result.url;
       });
     }
+  },
+  created() {
+    window.addEventListener("beforeinstallprompt", (e) => {
+      e.preventDefault();
+      // Stash the event so it can be triggered later.
+      this.deferredPrompt = e;
+    });
+    window.addEventListener("appinstalled", () => {
+      this.deferredPrompt = null;
+    });
   },
 };
 </script>

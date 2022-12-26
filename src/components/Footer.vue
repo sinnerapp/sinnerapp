@@ -73,7 +73,7 @@
           <span class=""> © 2022 </span>
           <span class="mt-7 md:mt-1">
             Created with ❤️ by
-            <a class="underline hover:text-primary-gray-20"> K </a>
+            <a class="underline hover:text-primary-gray-20" href="/"> K </a>
           </span>
         </div>
       </div>

@@ -83,7 +83,7 @@
                 d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75"
               />
             </svg>
-            Filter
+            Options
           </span>
         </button>
         <label for="filterModal" ref="filterModalRef"></label>
@@ -165,12 +165,17 @@
       </div>
 
       <div class="flex justify-between mt-4">
-        <h4 class="text-lg text-gray-500">
-          Showing {{ contents.length }} Items
+        <h4 class="text-lg text-gray-300">
+          Showing {{ (contents.data.length || []).length }} Items
         </h4>
       </div>
     </div>
-    <Contents :contents="contents" :key="contents.uKey" />
+    <Contents
+      :contents="contents"
+      :key="contents.uKey"
+      @paginate-back="paginateBack"
+      @paginate-forward="paginateForward"
+    />
   </section>
 </template>
 
@@ -272,6 +277,7 @@ export default {
     },
     changeProvider() {
       this.provider = this.selectedProvider;
+      this.selectedPage = 1;
       this.$router.push(
         `/explore/${this.provider}?search=${this.selectedKey}&sort=${this.selectedSort}&page=${this.selectedPage}`
       );
@@ -299,36 +305,6 @@ export default {
       const obj = this.availableProvider[i];
       return prop ? obj.params[prop] : obj.params;
     },
-    // fetchAPI() {
-
-    //   try {
-    //     fetch(
-    //     )
-    //       .then((response) => response.json())
-    //       .then((result) => {
-    //         result.uKey = uuidv4();
-    //         this.contents = result;
-    //         this.sortBy = result.sort;
-    //         this.currentPage = result.page;
-    //         console.log(JSON.parse(JSON.stringify(result)), "TRY BLOCK");
-    //       });
-    //   } catch (error) {
-    //     console.log("Using Alternatives, a bit slower please be patient.");
-    //     fetch(
-    //       `${this.apiEndpoints[1]}/${this.provider}/search?key=${this.selectedKey}&$sort=${this.sortBy}&page=${this.currentPage}`
-    //     )
-    //       .then((response) => response.json())
-    //       .then((result) => {
-    //         result.uKey = uuidv4();
-    //         this.contents = result;
-    //         this.sortBy = result.sort;
-    //         this.currentPage = result.page;
-    //         // console.log(JSON.parse(JSON.stringify(result)), "CATCH BLOCK");
-    //       });
-    //   } finally {
-    //     console.log("Success, Enjoy your content 😏");
-    //   }
-    // },
     fetchAPI() {
       try {
         fetch(
@@ -351,8 +327,10 @@ export default {
                   // set how much data will be cached
                   result.expired_at = dayjs().add(45, "minute");
                   result.provider = this.defaultProvider;
-                  localStorage.setItem("cached_data", JSON.stringify(result));
+
                   this.contents = result;
+                  if (!result.data.length) return false;
+                  localStorage.setItem("cached_data", JSON.stringify(result));
                   console.log("Request Success!");
                 });
             }
@@ -364,8 +342,9 @@ export default {
             // set how much data will be cached
             result.expired_at = dayjs().add(45, "minute");
             result.provider = this.defaultProvider;
-            localStorage.setItem("cached_data", JSON.stringify(result));
             this.contents = result;
+            if (!result.data.length) return false;
+            localStorage.setItem("cached_data", JSON.stringify(result));
             console.log("Request Success!");
           })
           .catch((err) => {
@@ -374,6 +353,25 @@ export default {
       } catch (error) {
         console.log(error);
       }
+    },
+    paginateForward() {
+      console.log("paginate next");
+      this.selectedPage++;
+      this.$router.push(
+        `/explore/${this.provider}?search=${this.selectedKey}&sort=${this.selectedSort}&page=${this.selectedPage}`
+      );
+      this.fetchAPI();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    },
+    paginateBack() {
+      if (!this.$route.query.page || this.$route.query.page == 1) return false;
+      console.log("paginate back");
+      this.selectedPage--;
+      this.$router.push(
+        `/explore/${this.provider}?search=${this.selectedKey}&sort=${this.selectedSort}&page=${this.selectedPage}`
+      );
+      this.fetchAPI();
+      window.scrollTo({ top: 0, behavior: "smooth" });
     },
   },
   created() {

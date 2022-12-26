@@ -1,6 +1,6 @@
 <template>
   <div class="px-4 py-2 overflow-hidden text-center">
-    <small class="font-semibold text-indigo-500">{{ content.id }}</small>
+    <small class="font-semibold text-indigo-300">{{ content.id }}</small>
     <h1 class="text-3xl font-bold text-indigo-500">{{ content.title }}</h1>
     <p class="font-semibold dark:text-white">
       Total Panels: {{ content.total }}
@@ -65,10 +65,10 @@ export default {
                 const existingIndex = oldValue.findIndex(
                   (el) => el.id === result.data.id
                 );
-                if (existingIndex >= 0) {
-                  console.log("already in list");
-                  return oldValue;
-                }
+                // if (existingIndex >= 0) {
+                //   console.log("already in list");
+                //   return oldValue;
+                // }
                 console.log("success added to list");
                 return [...oldValue, result.data];
               });

@@ -67,7 +67,7 @@
             ? 'translate-x-0 opacity-100 '
             : 'opacity-0 -translate-x-full',
         ]"
-        class="absolute inset-x-0 w-full px-6 py-4 transition-all duration-300 ease-in-out border-b border-black border-opacity-50  dark:shadow-white/10 dark:border-white md:mt-0 md:p-0 md:top-0 md:relative md:bg-transparent md:w-auto md:opacity-100 md:translate-x-0 md:flex md:items-center dark:border-opacity-50 backdrop-blur-sm md:border-none"
+        class="absolute inset-x-0 w-full px-6 py-4 transition-all duration-300 ease-in-out border-b border-black border-opacity-50  dark:shadow-white/10 dark:border-white md:mt-0 md:p-0 md:top-0 md:relative md:bg-transparent md:w-auto md:opacity-100 md:translate-x-0 md:flex md:items-center dark:border-opacity-50 backdrop-blur-css md:border-none"
       >
         <div class="flex flex-col md:flex-row md:mx-6">
           <router-link
@@ -121,6 +121,7 @@
                 d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
               ></path>
             </svg>
+            <span class="sr-only">Settings</span>
           </router-link>
           <router-link
             class="relative text-gray-700 transition-colors duration-300 transform  dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-300"
@@ -140,6 +141,7 @@
                 d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
               ></path>
             </svg>
+            <span class="sr-only">About</span>
           </router-link>
         </div>
       </div>
