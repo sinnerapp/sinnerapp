@@ -1,4 +1,4 @@
-# 403app-2
+# SinnerApp || 403App
 
 ### Your all-in-one doujinshi pages ready to go
 
