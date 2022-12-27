@@ -1,5 +1,7 @@
 # 403app-2
 
+### Your all-in-one doujinshi pages ready to go
+
 ## Project setup
 ```
 npm install
@@ -15,5 +17,4 @@ npm run serve
 npm run build
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Visit here: [sinnerapp.github.io](https://sinnerapp.github.io)
