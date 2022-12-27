@@ -2,6 +2,8 @@
 
 ### Your all-in-one doujinshi pages ready to go
 
+*Note: Cannot use IDB on Firefox Private Mode, maybe browser too but chromium browser based is not affected by this
+
 ## Project setup
 ```
 npm install
